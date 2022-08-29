@@ -1,0 +1,39 @@
+<h2>Products</h2>
+<div *ngFor="let product of products">
+  <h3>
+    <a
+      [title]="product.name + ' details'"
+      [routerLink]="['./products', product.id]"
+    >
+      <!-- note: routerlink expressed as array -->
+      <!-- url pattern: domain/products/1 -->
+      <!-- qn: why add [] on [title]? -->
+      <!-- ans: [] for attribute binding. only with [] the assigned atring is interpreted as code instead of text -->
+      {{ product.name }}
+      <!-- an example of Angular interpolation syntax -->
+      <!-- {{}} allows rendering property value as text -->
+      <!-- question: how did it find the product values? by the file name "product"? -->
+    </a>
+  </h3>
+  <!-- with ngFor, the div repeats for each product in the list -->
+  <!-- a "structural directive" -->
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+    <!-- ngIf adds conditions for this <p> to be rendered: only when there is a description -->
+  </p>
+
+  <button type="button" (click)="share()">
+    <!-- () used for event binding, followed by function call -->
+    <!-- question: why set to func() instead of func? why invoke it? -->
+    SHARE
+  </button>
+
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
